@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <title>페이스북 공유 샘플 페이지</title>
     <meta property="fb:app_id" content="346452240699567">
@@ -12,11 +11,57 @@
     <meta property="og:video:width" content="398">
     <meta property="og:video:height" content="264">
     <meta property="og:site_name" content="YouTube">
-
 </head>
 
 <body>
-    <h2>share-page</h2>
-</body>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div class="fb-share-button" data-href="https://leeyunbo.github.io/" data-layout="button_count">
+    </div>
+    <button id="shareBtn">Share Dialog</button>
+    <button id="feedBtn">Share feed</button> 
+    <button id="messageBtn">Share Message</button>
 
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '346452240699567',
+                xfbml: true,
+                version: 'v13.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        
+        document.getElementById('shareBtn').onclick = function () {
+            FB.ui({
+                display: 'popup',
+                method: 'share',
+                href: 'https://172.21.25.12:5501/snsshared/facebook_web/javascript-sdk/share-page.html',
+            }, function (response) { });
+        }
+
+
+        document.getElementById('feedBtn').onclick = function () {
+            FB.ui({
+                method: 'feed',
+                link: 'https://172.21.25.12:5501/snsshared/facebook_web/javascript-sdk/share-page.html'
+            }, function (response) { });
+        }
+
+        document.getElementById('messageBtn').onclick = function () {
+            FB.ui({
+                method: 'send',
+                link: 'https://172.21.25.12:5501/snsshared/facebook_web/javascript-sdk/share-page.html',
+            });
+        }
+    </script>
+</body>
 </html>
+
